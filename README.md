@@ -15,7 +15,7 @@ press/
 ├─ forme/        design system 1 — Forme: mono, A6, text, [bw]-survivable (playback)
 ├─ kit/          design system 2 — Kit: colour-first, square, full-bleed (Field Kit)
 ├─ tools/        shared build helpers (make_pdfx.sh — PDF/X-1a for press)
-├─ specs/        engine R&D: GAMEBOOK_SPEC, ELIZA_SPEC
+├─ specs/        engine R&D + house conventions (GAMEBOOK_SPEC, ELIZA_SPEC, FRONTMATTER)
 ├─ books/        one folder per book
 │  └─ _TEMPLATE/ starting point for a new book (build convention inside)
 └─ LICENSE / LICENSE-CONTENT   code = MIT, text/figures = CC0 (house-wide)
