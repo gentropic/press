@@ -1,0 +1,92 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{kit}[2026/06/06 Field Kit -- the colour/square illustrated book system]
+%% The SECOND GCU design system, sibling to Forme.
+%%   Forme = mono, A6, text-column, [bw]-survivable (playback).
+%%   Kit   = colour-FIRST, square, full-bleed illustration, two-voice (Field Kit).
+%% Colour is load-bearing here (the earth ramp IS the data), so unlike Forme there
+%% is no bw mode -- that is the whole point of having two systems.
+%%
+%% Trim is a package option so the series can change size without editing the style:
+%%   \usepackage[trim=210,bleed=5]{kit}   % Field Kit No.01 (Futura Cod.71 square)
+%% Design coordinates run 0..18 (a 18cm art square); \kitwrap scales that to the
+%% trim and floods the bleed ring.  Fonts resolve from the shared top-level fonts/
+%% via the build's TEXINPUTS/OSFONTDIR (see books/_TEMPLATE/build.sh).
+
+\RequirePackage{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,arrows.meta,decorations.pathreplacing}
+
+%% --- trim/bleed options (mm). page = trim + 2*bleed, square. -----------------
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=kit,prefix=kit@}
+\DeclareStringOption[210]{trim}
+\DeclareStringOption[5]{bleed}
+\ProcessKeyvalOptions*
+\newdimen\kit@trimdim  \kit@trimdim=\kit@trim mm
+\newdimen\kit@bleeddim \kit@bleeddim=\kit@bleed mm
+\newdimen\kit@pagedim  \kit@pagedim=\dimexpr\kit@trimdim+2\kit@bleeddim\relax
+\geometry{paperwidth=\kit@pagedim,paperheight=\kit@pagedim,margin=0mm}
+\pagestyle{empty}\setlength{\parindent}{0pt}
+\hyphenpenalty=10000\exhyphenpenalty=10000\tolerance=9999\emergencystretch=2em
+
+%% --- fonts. fontspec resolves .ttf by FILE only with an explicit Path=; XeTeX's
+%%     OSFONTDIR indexes by font NAME, not filename, so we must give a directory.
+%%     The book's build.sh sets \def\kitfontpath{...} (absolute path to the shared
+%%     fonts/) before \usepackage{kit}; we fall back to ../../fonts/ for a plain
+%%     `xelatex` run from a books/<x>/ dir.
+\providecommand{\kitfontpath}{../../fonts/}
+\newfontfamily\dispBlack[Path=\kitfontpath]{Barlow-Black.ttf}
+\newfontfamily\dispSemi[Path=\kitfontpath]{Barlow-SemiBold.ttf}
+\newfontfamily\mono[Path=\kitfontpath]{SpaceMono-Regular.ttf}
+\newfontfamily\monoB[Path=\kitfontpath]{SpaceMono-Bold.ttf}
+
+%% --- palette. cream ground + basalt ink + a 6-step earth ramp (the data) +
+%%     three signal hues. NB this is a DIFFERENT palette from Forme by design.
+\definecolor{bone}{HTML}{F2ECDD}\definecolor{basalt}{HTML}{24272D}
+\definecolor{basalt60}{HTML}{6E727B}\definecolor{ground}{HTML}{D7CDB4}
+\definecolor{casing}{HTML}{1B1D22}\definecolor{teal}{HTML}{2FA199}
+\definecolor{ferrous}{HTML}{C75B39}\definecolor{azure}{HTML}{3B7DD8}
+\definecolor{waste}{HTML}{CDC6B5}
+\definecolor{g0}{HTML}{F0E7D2}\definecolor{g1}{HTML}{E8C57E}\definecolor{g2}{HTML}{E0A14B}
+\definecolor{g3}{HTML}{D07B3C}\definecolor{g4}{HTML}{B85535}\definecolor{g5}{HTML}{8F3B2E}
+%% ramp as a list, for code that wants to iterate it
+\def\kitramp{g0,g1,g2,g3,g4,g5}
+
+%% --- the page furniture (unchanged from FieldKit No.01's inlined preamble) ----
+%% \scaffold : bone field + thin frame + corner ticks (the 0..18 art square)
+\newcommand{\scaffold}{%
+  \fill[bone] (0,0) rectangle (18,18);
+  \draw[basalt60,line width=0.4pt] (0.7,0.7) rectangle (17.3,17.3);
+  \foreach \cx/\cy in {0.7/0.7,17.3/0.7,0.7/17.3,17.3/17.3}{
+    \draw[basalt,line width=0.9pt] (\cx,\cy)++(-0.25,0)--++(0.5,0);
+    \draw[basalt,line width=0.9pt] (\cx,\cy)++(0,-0.25)--++(0,0.5);}}
+%% \header{fig caption}{act} : the FIELD KIT . No.01 running head
+\newcommand{\header}[2]{%
+  \node[anchor=north west,text=basalt,inner sep=0pt] at (1.15,16.95)
+     {\monoB\fontsize{8.5}{10}\selectfont FIELD KIT\,\textcolor{basalt60}{$\cdot$}\,No.01};
+  \node[anchor=north west,text=basalt60,inner sep=0pt] at (1.15,16.5)
+     {\mono\fontsize{7.5}{9}\selectfont #1};
+  \node[anchor=north east,text=basalt60,inner sep=0pt] at (16.85,16.95)
+     {\mono\fontsize{8.5}{10}\selectfont #2};}
+%% \readaloud{...} : the big say-out-loud line
+\newcommand{\readaloud}[1]{%
+  \node[anchor=south west,align=left,text=basalt,inner sep=0pt,text width=14.6cm] at (1.2,1.95)
+     {\dispBlack\fontsize{19}{22}\selectfont #1};}
+%% \gloss{...} : the small // line, the real idea for the grown-up
+\newcommand{\gloss}[1]{%
+  \node[anchor=south west,align=left,text=basalt60,inner sep=0pt,text width=15.6cm] at (1.2,1.0)
+     {\mono\fontsize{7.5}{9.5}\selectfont \textcolor{basalt}{//}\ #1};}
+
+%% --- \kitwrap{bg}{inner} : scale an 18cm (180mm) design to the trim, centre it on
+%%     the square page, flood matching background into the bleed ring. Replaces the
+%%     generator's wrap_bleed() so the bleed math lives in the style, not the book.
+%%     bg = bone | basalt (the page ground that bleeds off the trim).
+\newcommand{\kitwrap}[2]{%
+  \noindent\begin{tikzpicture}[x=1mm,y=1mm]%
+    \fill[#1] (0,0) rectangle (\kit@pagedim,\kit@pagedim);%
+    \node[inner sep=0pt] at (\dimexpr0.5\kit@pagedim\relax,\dimexpr0.5\kit@pagedim\relax)
+      {\resizebox{\kit@trimdim}{\kit@trimdim}{#2}};%
+  \end{tikzpicture}}
+
+\endinput

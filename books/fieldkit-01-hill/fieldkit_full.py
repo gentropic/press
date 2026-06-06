@@ -44,45 +44,20 @@ def rock(c,r): return cell_top(r)<=sy(cx(c))+0.02
 
 RAMP=["F0E7D2","E8C57E","E0A14B","D07B3C","B85535","8F3B2E"]
 
-PRE=r"""\documentclass[12pt]{article}
-\usepackage[paperwidth=220mm,paperheight=220mm,margin=0mm]{geometry}
-\usepackage{fontspec}\usepackage{tikz}\usetikzlibrary{calc,arrows.meta,decorations.pathreplacing}
-\pagestyle{empty}\setlength{\parindent}{0pt}
-\hyphenpenalty=10000\exhyphenpenalty=10000\tolerance=9999\emergencystretch=2em
-\newfontfamily\dispBlack[Path=./fonts/]{Barlow-Black.ttf}
-\newfontfamily\dispSemi[Path=./fonts/]{Barlow-SemiBold.ttf}
-\newfontfamily\mono[Path=./fonts/]{SpaceMono-Regular.ttf}
-\newfontfamily\monoB[Path=./fonts/]{SpaceMono-Bold.ttf}
-\definecolor{bone}{HTML}{F2ECDD}\definecolor{basalt}{HTML}{24272D}
-\definecolor{basalt60}{HTML}{6E727B}\definecolor{ground}{HTML}{D7CDB4}
-\definecolor{casing}{HTML}{1B1D22}\definecolor{teal}{HTML}{2FA199}
-\definecolor{ferrous}{HTML}{C75B39}\definecolor{azure}{HTML}{3B7DD8}
-\definecolor{waste}{HTML}{CDC6B5}
-"""
-for i,h in enumerate(RAMP):
-    PRE+=r"\definecolor{g%d}{HTML}{%s}"%(i,h)+"\n"
-PRE+=r"""
-\newcommand{\scaffold}{%
-  \fill[bone] (0,0) rectangle (18,18);
-  \draw[basalt60,line width=0.4pt] (0.7,0.7) rectangle (17.3,17.3);
-  \foreach \cx/\cy in {0.7/0.7,17.3/0.7,0.7/17.3,17.3/17.3}{
-    \draw[basalt,line width=0.9pt] (\cx,\cy)++(-0.25,0)--++(0.5,0);
-    \draw[basalt,line width=0.9pt] (\cx,\cy)++(0,-0.25)--++(0,0.5);}}
-\newcommand{\header}[2]{%
-  \node[anchor=north west,text=basalt,inner sep=0pt] at (1.15,16.95)
-     {\monoB\fontsize{8.5}{10}\selectfont FIELD KIT\,\textcolor{basalt60}{$\cdot$}\,No.01};
-  \node[anchor=north west,text=basalt60,inner sep=0pt] at (1.15,16.5)
-     {\mono\fontsize{7.5}{9}\selectfont #1};
-  \node[anchor=north east,text=basalt60,inner sep=0pt] at (16.85,16.95)
-     {\mono\fontsize{8.5}{10}\selectfont #2};}
-\newcommand{\readaloud}[1]{%
-  \node[anchor=south west,align=left,text=basalt,inner sep=0pt,text width=14.6cm] at (1.2,1.95)
-     {\dispBlack\fontsize{19}{22}\selectfont #1};}
-\newcommand{\gloss}[1]{%
-  \node[anchor=south west,align=left,text=basalt60,inner sep=0pt,text width=15.6cm] at (1.2,1.0)
-     {\mono\fontsize{7.5}{9.5}\selectfont \textcolor{basalt}{//}\ #1};}
-\begin{document}
-"""
+# Style now lives in the shared kit.sty (the second GCU design system). The
+# generator only emits content; the palette, fonts, page furniture (\scaffold,
+# \header, \readaloud, \gloss) and the bleed-wrap (\kitwrap) come from kit.sty.
+# RAMP is kept here only because the figure code below references g0..g5 by name,
+# which kit.sty defines identically -- they must stay in sync.
+import os
+# Shared fonts/ path: build.sh exports KIT_FONTS (absolute, forward-slashed for TeX);
+# fall back to the monorepo-relative ../../fonts/ for a bare `python+xelatex` run.
+_FONTPATH=os.environ.get("KIT_FONTS","../../fonts/")
+if not _FONTPATH.endswith("/"): _FONTPATH+="/"
+PRE=(r"\documentclass[12pt]{article}"+"\n"
+     r"\def\kitfontpath{"+_FONTPATH+"}"+"\n"      # where kit.sty finds the .ttf files
+     r"\usepackage[trim=210,bleed=5]{kit}"+"\n"   # Field Kit No.01 = Futura Cod.71 square
+     r"\begin{document}"+"\n")
 
 LANG = sys.argv[1] if len(sys.argv)>1 else "en"
 PT = (LANG=="pt")
@@ -933,15 +908,13 @@ col+=r"  \node[anchor=south west,align=left,text=basalt60,inner sep=0pt,text wid
 col+=r"\end{tikzpicture}"
 P.append(col)
 
-# --- bleed/trim pass: scale each 18-unit (180mm) design to 210mm trim,
-#     centre on a 220mm page, flood matching bg into the 5mm bleed ring ---
+# --- bleed/trim pass: delegate to kit.sty's \kitwrap (scales the 18-unit design
+#     to the trim, centres on the square page, floods matching bg into the bleed) ---
 def wrap_bleed(pg):
     cp = pg.endswith(r"\clearpage")
     inner = pg[:-len(r"\clearpage")] if cp else pg
     bg = "basalt" if r"\fill[basalt] (0,0) rectangle (18,18)" in inner else "bone"
-    out = (r"\noindent\begin{tikzpicture}[x=1mm,y=1mm]\fill["+bg+r"] (0,0) rectangle (220,220);"
-           r"\node[inner sep=0pt] at (110,110) {\resizebox{210mm}{210mm}{"+inner+r"}};"
-           r"\end{tikzpicture}")
+    out = r"\kitwrap{"+bg+r"}{"+inner+r"}"
     return out + (r"\clearpage" if cp else "")
 # ---- front matter (mirrors Playback: half-title, frontispiece, title, copyright+dedication verso) ----
 _FM_TITLE = "O QUE TEM EMBAIXO DA COLINA?" if PT else "WHAT'S UNDER THE HILL?"
@@ -1007,6 +980,6 @@ def _ren(m):
     _n[0]+=1; return f"FIG.{_n[0]:02d}"
 body=re.sub(r"FIG\.\d+", _ren, body)
 out = "fieldkit_full_pt" if PT else "fieldkit_full"
-with open(out+".tex","w") as fh:
+with open(out+".tex","w",encoding="utf-8") as fh:   # utf-8: pt-BR accents (the cp1252 bug)
     fh.write(PRE+body+"\n\\end{document}\n")
 print("lang:",LANG,"pages:",len(P),"figs:",_n[0],"->",out+".tex")

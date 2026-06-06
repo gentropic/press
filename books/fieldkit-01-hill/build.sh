@@ -1,23 +1,31 @@
-#!/usr/bin/env sh
-# Build both editions of "Field Kit No.01 — What's Under the Hill?".
-#
-# Requires:
-#   - python3
-#   - xelatex (TeX Live / MiKTeX)
-#   - the fonts Barlow and Space Mono (both OFL), under fonts/ — fieldkit_full.py
-#     loads them by file path via fontspec.
-#
-# One XeLaTeX pass per file is enough (no remember-picture overlays here).
+#!/usr/bin/env bash
+# Build Field Kit No.01 in monorepo mode: style from ../../kit/kit.sty, fonts from
+# the shared ../../fonts/. Emits EN + pt-BR editions. No remember-picture overlays
+# here, so one xelatex pass per edition is enough (unlike playback).
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+KIT="$(cd "$HERE/../../kit" && pwd)"
+FONTS="$(cd "$HERE/../../fonts" && pwd)"
 
-set -e
+# kit.sty findable by \usepackage{kit}; the generator passes KIT_FONTS into the
+# .tex as \kitfontpath so fontspec's Path= resolves the shared .ttf files.
+export TEXINPUTS=".:${KIT}//:"
+export KIT_FONTS="${FONTS}/"
 
-python3 fieldkit_full.py            # -> fieldkit_full.tex      (EN)
-xelatex -interaction=nonstopmode -halt-on-error fieldkit_full.tex
+cd "$HERE"
+build_edition () {  # $1 = lang arg ("" or "pt"), $2 = base name
+  echo "[gen] python fieldkit_full.py $1"
+  python fieldkit_full.py $1
+  echo "[build] xelatex $2"
+  xelatex -interaction=nonstopmode -halt-on-error "$2.tex" >"$2.build.log" 2>&1 \
+    || { echo "  FAILED — tail:"; tail -15 "$2.build.log"; exit 1; }
+  local pages; pages="$(pdfinfo "$2.pdf" 2>/dev/null | awk '/^Pages:/{print $2}')"
+  local ovf;   ovf="$(grep -c Overfull "$2.build.log" || true)"
+  echo "  -> $2.pdf  pages=${pages}  overfull=${ovf}"
+}
 
-python3 fieldkit_full.py pt         # -> fieldkit_full_pt.tex   (pt-BR)
-xelatex -interaction=nonstopmode -halt-on-error fieldkit_full_pt.tex
+build_edition ""   fieldkit_full       # EN  (free CC0 edition)
+build_edition pt   fieldkit_full_pt    # pt-BR (the printed edition)
 
-echo "Done."
-echo "  fieldkit_full.pdf      (EN  — free CC0 edition)"
-echo "  fieldkit_full_pt.pdf   (pt-BR — the printed edition)"
-echo "Pages render at 220x220mm = 210x210 trim + 5mm bleed (Futura Cod.71)."
+echo "[done] both editions. Expect 46 pp, 220x220mm (210 trim + 5mm bleed)."
+echo "Press files: ./make_pdfx.sh (PDF/X-1a; TrimBox 210 / BleedBox 220)."

@@ -11,13 +11,21 @@ shared across the house.
 
 ```
 press/
-├─ forme/        the shared design system (Forme): forme.sty, fonts/, FORME.md
+├─ fonts/        shared fonts (Barlow + Space Mono, OFL) — used by all books
+├─ forme/        design system 1 — Forme: mono, A6, text, [bw]-survivable (playback)
+├─ kit/          design system 2 — Kit: colour-first, square, full-bleed (Field Kit)
 ├─ tools/        shared build helpers (make_pdfx.sh — PDF/X-1a for press)
 ├─ specs/        engine R&D: GAMEBOOK_SPEC, ELIZA_SPEC
 ├─ books/        one folder per book
 │  └─ _TEMPLATE/ starting point for a new book (build convention inside)
 └─ LICENSE / LICENSE-CONTENT   code = MIT, text/figures = CC0 (house-wide)
 ```
+
+**Two design systems, by design.** *Forme* dresses mono/A6/text books that must
+survive black-and-white (playback). *Kit* dresses colour-first square illustrated
+books where colour is load-bearing (the Field Kit series). They share fonts, tools,
+specs, and discipline — not a stylesheet. Books build against one via a small
+`build.sh` that puts the chosen `.sty` + shared `fonts/` on the TeX path.
 
 ## The books
 
