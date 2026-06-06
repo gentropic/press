@@ -24,7 +24,7 @@ press/
 | Book | Folder | Status |
 |---|---|---|
 | *The Book That Plays Back* (Edition 00) | — (own repo) | **published** · A6 hardcover · ISBN 978-65-02-14290-5 |
-| *Field Kit No.01 — What's Under the Hill?* | `books/fieldkit-01-hill/` | drafting |
+| *Field Kit No.01 — What's Under the Hill?* | `books/fieldkit-01-hill/` | drafting · square 210×210 (Cod.71) · EN + pt-BR · 46 pp · self-contained build |
 | *The Paper Therapist* (hand-runnable ELIZA) | `books/paper-therapist/` | concept (`specs/ELIZA_SPEC.md`) |
 
 **Note on playback:** the first book stays in its own repo
