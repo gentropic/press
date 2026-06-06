@@ -1,0 +1,39 @@
+# === Claude / agent local files (never shared) ===
+CLAUDE.md
+.claude/
+.claude.json
+.claude.json.backup
+.mcp.json
+*.cradle-backup
+
+# === LaTeX build artifacts ===
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+
+# === Generated TeX — reproducible from each book's generator, so not tracked ===
+# (per-book generators emit their own .tex; keep sources, not outputs)
+*.tex
+!**/template.tex
+# ^ but DO track any hand-authored template.tex if a book needs one
+
+# === Python bytecode ===
+__pycache__/
+*.pyc
+
+# === Built artifacts (ship via GitHub Release, not the repo) ===
+*.pdf
+dist/
+
+# === Staged ICC / scratch from the PDF/X step ===
+_cmyk.icc
+_pdfx_def.ps
+
+# === Scratch ===
+*.png
+scratch_*
+tail.py
