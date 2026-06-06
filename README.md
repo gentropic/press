@@ -33,7 +33,7 @@ specs, and discipline — not a stylesheet. Books build against one via a small
 |---|---|---|
 | *The Book That Plays Back* (Edition 00) | — (own repo) | **published** · A6 hardcover · ISBN 978-65-02-14290-5 |
 | *Field Kit No.01 — What's Under the Hill?* | `books/fieldkit-01-hill/` | drafting · square 210×210 (Cod.71) · EN + pt-BR · 46 pp · self-contained build |
-| *The Paper Therapist* (hand-runnable ELIZA) | `books/paper-therapist/` | concept (`specs/ELIZA_SPEC.md`) |
+| *The Paper Therapist* (hand-runnable ELIZA) | `books/paper-therapist/` | scaffold · A5 mono · engine works, mat proven · fill the 19-keyword roster |
 
 **Note on playback:** the first book stays in its own repo
 ([`gentropic/playback`](https://github.com/gentropic/playback)) on purpose — its
