@@ -11,7 +11,10 @@ set. No generator, no pages yet — the content design is the next real work.
 ## The creative work to do (ordered)
 
 1. **Page sequence / storyboard.** Decide the ~20–30 spreads as concrete
-   observation beats, NOT a curriculum. Candidate arc:
+   observation beats, NOT a curriculum. **Target the bottom (concrete) rung** of
+   the developmental ladder in `specs/AUDIENCE.md` — sort/compare/notice/tally,
+   zero axes. (e.g. the "line up rocks pale→dark = you made a graph" spread is the
+   sweet spot: a real axis built from objects in the hand.) Candidate arc:
    _look at the hill → it has layers (the road-cut) → the layers are different →
    it's different over here than over there → pick up two stones, compare →
    dig a little hole, what changed? → the ground keeps secrets you can see →

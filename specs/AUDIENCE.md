@@ -59,6 +59,49 @@ From the reviewer, and on-brand for GCU:
   book a child reads for delight. Never at the cost of the delight; the tools ride
   *under* the story, they don't replace it.
 
+## The developmental ladder — which data skill lands at which rung
+
+So "baixar o nível" is a *target*, not a vibe. Ages are rough, overlapping, and
+scaffolding-dependent (the old "not until 11" Piagetian picture is largely revised
+— kids do far more, far earlier, *when the abstraction is concretely scaffolded*).
+Sanity-check specifics against current ed research; the shape is well-established.
+
+**The governing principle: Concrete → Pictorial → Abstract** (Bruner). The *same*
+concept is reachable years earlier at the concrete end than the abstract end. The
+variogram isn't hard because "difference vs. distance" is hard — it's hard because
+it sits at the top (abstract) rung. Move a concept down a rung and the age drops.
+
+| Age (rough) | Rung | Data skills genuinely reachable |
+|---|---|---|
+| **3–5** | concrete | sort/classify (the root of all analysis); compare (more/less, same/different); count; **object "graphs"** — a bar chart made of *real things* lined up in rows. Graph-*reading* is present at 4; it's just not on paper. |
+| **5–7** | pictorial begins | pictographs (one drawing = one thing) → simple bar charts (a bar *stands for* the things); **tally tables** as records of observation; read *off* a graph ("tallest bar = dogs"). |
+| **7–9** | reading *between* | compare within a graph ("3 more than"), totals; the axis as a *measured scale*, not just labels. |
+| **9–11+** | reading *beyond* | **line graphs / continuous relationships ("curves")**; scatter, trend, "what the shape *means*"; infer/predict. ← No.01's variogram lives here. |
+
+**Curcio's three levels of graph comprehension** (the same idea, sharper):
+1. **Read the data** (what's literally there) — ~5–6
+2. **Read between the data** (compare, combine) — ~7–9
+3. **Read beyond the data** (infer, predict, trend) — ~10+
+
+A child is fluent at level 1 years before level 3. **No.01 demands level 3** (infer
+a smooth curve from scattered points, predict the unsampled) — that is exactly the
+mismatch the review caught.
+
+### What this means for No.00 (target the bottom rung deliberately)
+- Live in the **concrete rung**: sort, compare, notice variation, tally with real
+  marks. Teach the *attitude* of data ("let's count and compare and see") — fully
+  doable at 4 — with **zero axes**.
+- The deepest analysis habits aren't graphs at all: **categorize, compare, notice
+  variation, record what you see, ask "is this always true?"** Teachable at 3–4,
+  purely concretely, and they're precisely what makes a graph *understandable*
+  later. The graph is just the eventual *notation* for habits a preschooler can
+  already practice with a handful of stones.
+- **The earliest honest "graph" (~age 4):** have the child collect a few rocks and
+  line them up pale→dark. That's *ordering by a variable* — a real axis — built
+  from objects in the hand. Nothing is drawn, yet they've *made* a graph. A spread
+  like this is the No.00 sweet spot: it plants No.01's "spatial variability" and
+  "near things are alike" as pure play.
+
 ## The general rule for any GCU book
 
 State the true audience plainly (cover, subtitle, colophon). If you feel a book
