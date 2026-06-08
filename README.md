@@ -15,7 +15,7 @@ press/
 ├─ forme/        design system 1 — Forme: mono, A6, text, [bw]-survivable (playback)
 ├─ kit/          design system 2 — Kit: colour-first, square, full-bleed (Field Kit)
 ├─ tools/        shared build helpers (make_pdfx.sh — PDF/X-1a for press)
-├─ specs/        engine R&D + house conventions (GAMEBOOK_SPEC, ELIZA_SPEC, FRONTMATTER, AUDIENCE)
+├─ specs/        engine R&D + house conventions (GAMEBOOK_SPEC, ELIZA_SPEC, SEARLE_PLAYS_CHESS, FRONTMATTER, AUDIENCE)
 ├─ books/        one folder per book
 │  └─ _TEMPLATE/ starting point for a new book (build convention inside)
 └─ LICENSE / LICENSE-CONTENT   code = MIT, text/figures = CC0 (house-wide)
@@ -35,6 +35,7 @@ specs, and discipline — not a stylesheet. Books build against one via a small
 | *Field Kit No.00 — Look!* (the very-young floor) | `books/fieldkit-00-look/` | concept · observation, not geostatistics · see `specs/AUDIENCE.md` |
 | *Field Kit No.01 — What's Under the Hill?* | `books/fieldkit-01-hill/` | drafting · square 210×210 (Cod.71) · EN + pt-BR · 46 pp · for older kids + curious adults |
 | *The Paper Therapist* (hand-runnable ELIZA) | `books/paper-therapist/` | scaffold · A5 mono · engine works, mat proven · fill the 19-keyword roster |
+| *Searle Plays Chess* (the Chinese Room, with a rating) | — | concept (`specs/SEARLE_PLAYS_CHESS.md`) · hand-run a deterministic engine; measured Elo on the cover |
 
 **Note on playback:** the first book stays in its own repo
 ([`gentropic/playback`](https://github.com/gentropic/playback)) on purpose — its
