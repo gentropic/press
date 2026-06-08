@@ -1,13 +1,34 @@
-# SEARLE_PLAYS_CHESS.md — the Chinese Room, with a rating
+# SEARLE_PLAYS_CHESS.md — the chess book (Comprehension Zero №1)
 
-*Working title: **Searle Plays Chess**. A design sketch, not yet built. Sibling to
-`ELIZA_SPEC.md` — the second (and sharpest) of the "become a machine" line.*
+*Design sketch, not yet built. Title evolved: the **Searle Plays Chess** working
+title is retired (we don't use the real Searle as a character — see §0.1); this is
+now **Comprehension Zero №1**, the chess book, working title TBD (candidates:
+"Standing Orders", "Protocol", "Check"). Sibling to `ELIZA_SPEC.md`.*
 
 A book you **operate** to play chess. The book is the engine; you are the CPU. You
 follow a short, exact rule-ladder; the book makes legal, purposeful-looking moves;
 you win against weak opponents and lose to anyone decent. At no point do you form a
 chess *thought*. And printed on the cover is a **measured Elo** — proof of exactly
 how good the not-understanding is.
+
+---
+
+## The series: COMPREHENSION ZERO
+
+GCU's reader-as-CPU line (the old "become a machine" books, now a brand). The name
+is the thesis in two words — **competent output, zero understanding** — and reads
+as thriller ("Threat Level Zero") while being a literal cognitive-science claim.
+A numbered series like Field Kit:
+
+| № | Book | You become | Status |
+|---|---|---|---|
+| **1** | the chess book (this spec) | a chess engine | concept |
+| **2** | The Paper Therapist (`ELIZA_SPEC.md`) | a chatbot | scaffold |
+| (3) | the parser book (Liberdade, deferred) | a translator | idea |
+
+Every book: a plain instructional surface (you run the rules), a foot-essay
+carrying the philosophy (Chinese Room etc.), and the hollowness made literal. The
+Paper Therapist retro-fits into the series.
 
 ---
 
@@ -26,8 +47,8 @@ argument in three ways the original Mandarin version cannot:
    The Room made tangible, not argued.
 3. **The Elo is the Turing test, quantified.** Searle's argument is qualitative
    ("seems to understand, doesn't"). Chess lets you put a *number* on the seeming.
-   Nobody has put an Elo on the Chinese Room. **"Searle Plays Chess · Elo ~700"** is
-   a precise claim about how competent rule-following-without-understanding is.
+   Nobody has put an Elo on the Chinese Room. **"Elo ~700"** on the cover is a
+   precise claim about how competent rule-following-without-understanding is.
 
 The reader *becomes* the man in the room: follows ~7 rules, plays ~700-Elo chess,
 thinks nothing. The closing turn of the knife:
@@ -39,6 +60,46 @@ thinks nothing. The closing turn of the knife:
 The acid only burns if the number is real (see §4). The Elo is not marketing — it
 **is** the thesis: that rule-following-without-understanding achieves a specific,
 measured competence. Hand-wave the number and you hand-wave the argument.
+
+### 0.1 Searle is CREDITED, not charactered
+
+The real **John Searle (1932–2025)** and his Chinese Room (1980) are engaged
+*seriously* in the foot-essay (§5b), by name. He is **NOT** a character in the
+fiction — we don't caricature a real (recently deceased, and reputationally
+complicated) person as a recurring imprint mascot. The protagonist is a generic
+invention (§0.2). This keeps GCU clean and the philosophy respectful, and gives the
+series a reusable owned character the real Searle never could be.
+
+### 0.2 The frame: Jack Stone, the Operator
+
+The book opens with a **one-page cold-open fiction** (the only "story" — keep it to
+one page; the power is in the *doing*, not plot). Then the book proper is the plain
+instructional engine + foot-essay.
+
+- **Protagonist: Jack Stone** — a thriller-generic name pitched so squarely it reads
+  as an unreplaced placeholder. An "Operator": elite-coded in every cosmetic way,
+  comprehension **zero** underneath. The gap between the tactical surface and the
+  total absence of understanding *is* the Chinese Room, in a plate carrier.
+- **Tone: tactical-deadpan ⨯ Usborne-puzzle-book earnestness.** Clancy-flavoured
+  thriller narration ("Stone does not know what game he is playing. Stone follows
+  the protocol.") crossed with the cosy *Puzzle Adventures* voice ("Can YOU help
+  Stone read the board? Look carefully…"). The puzzle-book register secretly
+  justifies the whole reader-solves-to-advance format — and makes the reveal land
+  twice. **Affectionate genre-pastiche, NOT named references** (no real Clancy/Leigh
+  characters or titles — keep it generic & CC0-clean).
+- **The mechanic, re-skinned as mission protocol:** the 7-rung ladder = Stone's
+  *standing orders*; the check-detection mat = a *threat sweep*; the capture-finder
+  = *target acquisition*. (Renames only — same engine as §1–2.)
+- **The cold-open premise:** Stone, locked in a back room (a Macau-casino-ish
+  high-stakes frame), is passed slips of symbols he can't read; a card in English
+  says *follow the rules, pass back a reply, the door opens.* He doesn't know it's
+  chess. He doesn't know he's playing — or winning.
+- **The reveal (closing fiction):** there was no casino, no bet, no danger. The
+  "symbols under the door" were a **kindergarten class's chess project**; the kids
+  fed him moves, giggling at the grown-up who insisted on rules instead of just
+  *looking at the board.* Understanding was available the whole time — he chose the
+  rulebook. (The deeper Chinese-Room cut, as comedy. Funnier the more "elite" Stone
+  believes he is.)
 
 ---
 
@@ -137,16 +198,16 @@ cover line, and the whole point is measurability, not strength.
 
 ---
 
-## 5. The "become a machine" line
+## 5. The Comprehension Zero series
 
-| Book | You become | Hollowness is… |
-|---|---|---|
-| **The Paper Therapist** (`ELIZA_SPEC.md`) | a chatbot | *inferred* (you feel it) |
-| **Searle Plays Chess** (this) | a game engine | **measured & adversarial** (a scoreboard) |
-| *(Searle in Liberdade — deferred)* | a parser/translator | *experienced* (the seam) |
+| № | Book | You become | Hollowness is… |
+|---|---|---|---|
+| 2 | **The Paper Therapist** (`ELIZA_SPEC.md`) | a chatbot | *inferred* (you feel it) |
+| **1** | **the chess book** (this) | a game engine | **measured & adversarial** (a scoreboard) |
+| (3) | *the parser book (Liberdade — deferred)* | a translator | *experienced* (the seam) |
 
 Chess is the apex: the only one where the Chinese Room has a **rating**. Likely the
-flagship of the line.
+flagship of the series. (See the series header near the top.)
 
 ---
 

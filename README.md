@@ -34,8 +34,13 @@ specs, and discipline — not a stylesheet. Books build against one via a small
 | *The Book That Plays Back* (Edition 00) | — (own repo) | **published** · A6 hardcover · ISBN 978-65-02-14290-5 |
 | *Field Kit No.00 — Look!* (the very-young floor) | `books/fieldkit-00-look/` | concept · observation, not geostatistics · see `specs/AUDIENCE.md` |
 | *Field Kit No.01 — What's Under the Hill?* | `books/fieldkit-01-hill/` | drafting · square 210×210 (Cod.71) · EN + pt-BR · 46 pp · for older kids + curious adults |
-| *The Paper Therapist* (hand-runnable ELIZA) | `books/paper-therapist/` | scaffold · A5 mono · engine works, mat proven · fill the 19-keyword roster |
-| *Searle Plays Chess* (the Chinese Room, with a rating) | — | concept (`specs/SEARLE_PLAYS_CHESS.md`) · hand-run a deterministic engine; measured Elo on the cover |
+| *The Paper Therapist* — **Comprehension Zero №2** (hand-runnable ELIZA) | `books/paper-therapist/` | scaffold · A5 mono · engine works, mat proven · fill the 19-keyword roster |
+| *Comprehension Zero №1* — the chess book (Jack Stone; Chinese Room, with a rating) | — | concept (`specs/SEARLE_PLAYS_CHESS.md`) · hand-run a deterministic engine; measured Elo on the cover |
+
+> **Comprehension Zero** is GCU's reader-as-CPU series: books you *operate* to
+> become a machine (a chess engine, a chatbot, a parser) — competent output, zero
+> understanding. Each pairs a plain instructional surface with a foot-essay carrying
+> the philosophy (the Chinese Room, Searle 1980).
 
 **Note on playback:** the first book stays in its own repo
 ([`gentropic/playback`](https://github.com/gentropic/playback)) on purpose — its

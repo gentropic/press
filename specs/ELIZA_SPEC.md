@@ -1,6 +1,7 @@
 # ELIZA_SPEC.md — a hand-runnable ELIZA, in a book
 
-*Working title: **THE PAPER THERAPIST** (GCU Field Kit, "operate-the-machine" line).
+*Working title: **THE PAPER THERAPIST** — **Comprehension Zero №2** (GCU's
+reader-as-CPU series; see `SEARLE_PLAYS_CHESS.md` for the series frame).
 Provisional; this is a design sketch, not yet built.*
 
 A book you **operate** with a pencil and a notepad. The book is the program; the
